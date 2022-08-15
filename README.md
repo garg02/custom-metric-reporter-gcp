@@ -1,3 +1,1 @@
-# Create GCP custom metric using Ops Agent to report variables
-
-
+## Report Environment Variables as GCP Custom Metrics using Go
