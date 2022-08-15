@@ -1,0 +1,300 @@
+{
+  "category": "CUSTOM",
+  "dashboardFilters": [],
+  "displayName": "Final Monitoring",
+  "mosaicLayout": {
+    "columns": 12,
+    "tiles": [
+      {
+        "height": 4,
+        "widget": {
+          "title": "minimap CPU usage by batch",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesQueryLanguage": "fetch gce_instance\n| { metric 'agent.googleapis.com/processes/cpu_time';\n      metric 'custom.googleapis.com/batch_num'\n    }\n| join\n| filter (metric.command == 'minimap2')\n| value val(0)\n| align rate(1m)\n| every 1m\n| group_by\n    [metric.batch_num, metadata.system.name: metadata.system_labels.name],\n    [value_cpu_time_aggregate: aggregate(value.cpu_time)]"
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        },
+        "width": 6,
+        "xPos": 0,
+        "yPos": 0
+      },
+      {
+        "height": 4,
+        "widget": {
+          "title": "minimap Resident Memory by Batch ",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesQueryLanguage": "fetch gce_instance\n| \t{\n\tmetric 'agent.googleapis.com/processes/rss_usage';\n\tmetric 'custom.googleapis.com/batch_num'\n\t} \n| join \n| filter (metric.command == 'minimap2')\n| value val(0)\n| group_by 1m, [value_rss_usage_mean: mean(value.rss_usage)]\n| every 1m\n| group_by [metric.batch_num, metadata.system.name: metadata.system_labels.name],\n    [value_rss_usage_mean_aggregate: aggregate(value_rss_usage_mean)]"
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        },
+        "width": 6,
+        "xPos": 6,
+        "yPos": 0
+      },
+      {
+        "height": 4,
+        "widget": {
+          "title": "minimap Virtual Memory by Batch ",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesQueryLanguage": "fetch gce_instance\n| \t{\n\tmetric 'agent.googleapis.com/processes/vm_usage';\n\tmetric 'custom.googleapis.com/batch_num'\n\t} \n| join \n| filter (metric.command == 'minimap2')\n| value val(0)\n| group_by 1m, [value_vm_usage_mean: mean(vm_usage)]\n| every 1m\n| group_by [metric.batch_num, metadata.system.name: metadata.system_labels.name],\n    [value_vm_usage_mean_aggregate: aggregate(value_vm_usage_mean)]"
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        },
+        "width": 6,
+        "xPos": 0,
+        "yPos": 4
+      },
+      {
+        "height": 4,
+        "widget": {
+          "title": "minimap Bytes Read by Batch ",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesQueryLanguage": "fetch gce_instance\n| \t{\n\tmetric 'agent.googleapis.com/processes/disk/read_bytes_count';\n\tmetric 'custom.googleapis.com/batch_num'\n\t} \n| join \n| filter (metric.command == 'minimap2')\n| value val(0)\n| group_by 1m, [value_read_bytes_mean: mean(read_bytes_count)]\n| every 1m\n| group_by [metric.batch_num, metadata.system.name: metadata.system_labels.name],\n    [value_read_bytes_mean_aggregate: aggregate(value_read_bytes_mean)]"
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        },
+        "width": 6,
+        "xPos": 6,
+        "yPos": 4
+      },
+      {
+        "height": 4,
+        "widget": {
+          "title": "minimap Bytes Written by Batch ",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesQueryLanguage": "fetch gce_instance\n| \t{\n\tmetric 'agent.googleapis.com/processes/disk/write_bytes_count';\n\tmetric 'custom.googleapis.com/batch_num'\n\t} \n| join \n| filter (metric.command == 'minimap2')\n| value val(0)\n| group_by 1m, [value_write_bytes_mean: mean(write_bytes_count)]\n| every 1m\n| group_by [metric.batch_num, metadata.system.name: metadata.system_labels.name],\n    [value_write_bytes_mean_aggregate: aggregate(value_write_bytes_mean)]"
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        },
+        "width": 6,
+        "xPos": 0,
+        "yPos": 8
+      },
+      {
+        "height": 4,
+        "widget": {
+          "title": "samtools CPU usage by batch",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesQueryLanguage": "fetch gce_instance\n| { metric 'agent.googleapis.com/processes/cpu_time';\n      metric 'custom.googleapis.com/batch_num'\n    }\n| join\n| filter (metric.command == 'samtools')\n| value val(0)\n| align rate(1m)\n| every 1m\n| group_by\n    [metric.batch_num, metadata.system.name: metadata.system_labels.name],\n    [value_cpu_time_aggregate: aggregate(value.cpu_time)]"
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        },
+        "width": 6,
+        "xPos": 6,
+        "yPos": 8
+      },
+      {
+        "height": 4,
+        "widget": {
+          "title": "samtools Resident Memory by Batch ",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesQueryLanguage": "fetch gce_instance\n| \t{\n\tmetric 'agent.googleapis.com/processes/rss_usage';\n\tmetric 'custom.googleapis.com/batch_num'\n\t} \n| join \n| filter (metric.command == 'samtools')\n| value val(0)\n| group_by 1m, [value_rss_usage_mean: mean(value.rss_usage)]\n| every 1m\n| group_by [metric.batch_num, metadata.system.name: metadata.system_labels.name],\n    [value_rss_usage_mean_aggregate: aggregate(value_rss_usage_mean)]"
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        },
+        "width": 6,
+        "xPos": 0,
+        "yPos": 12
+      },
+      {
+        "height": 4,
+        "widget": {
+          "title": "samtools Virtual Memory by Batch ",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesQueryLanguage": "fetch gce_instance\n| \t{\n\tmetric 'agent.googleapis.com/processes/vm_usage';\n\tmetric 'custom.googleapis.com/batch_num'\n\t} \n| join \n| filter (metric.command == 'samtools')\n| value val(0)\n| group_by 1m, [value_vm_usage_mean: mean(vm_usage)]\n| every 1m\n| group_by [metric.batch_num, metadata.system.name: metadata.system_labels.name],\n    [value_vm_usage_mean_aggregate: aggregate(value_vm_usage_mean)]"
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        },
+        "width": 6,
+        "xPos": 6,
+        "yPos": 12
+      },
+      {
+        "height": 4,
+        "widget": {
+          "title": "samtools Bytes Read by Batch ",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesQueryLanguage": "fetch gce_instance\n| \t{\n\tmetric 'agent.googleapis.com/processes/disk/read_bytes_count';\n\tmetric 'custom.googleapis.com/batch_num'\n\t} \n| join \n| filter (metric.command == 'samtools')\n| value val(0)\n| group_by 1m, [value_read_bytes_mean: mean(read_bytes_count)]\n| every 1m\n| group_by [metric.batch_num, metadata.system.name: metadata.system_labels.name],\n    [value_read_bytes_mean_aggregate: aggregate(value_read_bytes_mean)]"
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        },
+        "width": 6,
+        "xPos": 0,
+        "yPos": 16
+      },
+      {
+        "height": 4,
+        "widget": {
+          "title": "samtools Bytes Written by Batch ",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesQueryLanguage": "fetch gce_instance\n| \t{\n\tmetric 'agent.googleapis.com/processes/disk/write_bytes_count';\n\tmetric 'custom.googleapis.com/batch_num'\n\t} \n| join \n| filter (metric.command == 'samtools')\n| value val(0)\n| group_by 1m, [value_write_bytes_mean: mean(write_bytes_count)]\n| every 1m\n| group_by [metric.batch_num, metadata.system.name: metadata.system_labels.name],\n    [value_write_bytes_mean_aggregate: aggregate(value_write_bytes_mean)]"
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        },
+        "width": 6,
+        "xPos": 6,
+        "yPos": 16
+      }
+    ]
+  }
+}
