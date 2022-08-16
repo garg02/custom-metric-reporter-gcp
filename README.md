@@ -11,6 +11,10 @@ For each pair in the file, the key becomes the name of the custom metric, and **
         sudo apt install -y git-all
         wget https://golang.org/dl/go1.19.linux-amd64.tar.gz
         sudo tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
+        echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
+        echo "export GOPATH=~/.go" >> ~/.profile
+        source ~/.profile
+        
 2. Install Google Ops agent
 
         curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
