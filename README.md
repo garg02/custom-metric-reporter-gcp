@@ -6,9 +6,9 @@ This application reports custom metrics to GCP Monitoring and is written in Go. 
 For each pair in the file, the key becomes the name of the custom metric, and ***the value becomes part of the label of the custom metric*** (and not the actual value of the custom metric). While it may seem counterintuitive to store the value as a label, we want to join/align the metrics to an instance's CPU/GPU/IO usage. Therefore, we would benefit from storing the value as metric "metadata" rather than the number itself.
 
 ### Before Starting
-1.  Install Golang on your instance
+1.  Install Golang and Git on your instance
 
-        sudo apt install -y golang-go
+        sudo apt install -y golang-go git-all
 2. Install Google Ops agent
 
         curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
