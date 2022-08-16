@@ -22,7 +22,7 @@ For each pair in the file, the key becomes the name of the custom metric, and **
 3. Install and build repo
         
         git clone https://github.com/garg02/custom-metric-reporter-gcp.git
-        cd gcp_report_batch
+        cd custom-metric-reporter-gcp
         go mod init metrics
         go build metrics.go
         chmod +x metrics
