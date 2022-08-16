@@ -8,7 +8,7 @@ For each pair in the file, the key becomes the name of the custom metric, and **
 ### Before Starting
 1.  Install Golang on your instance
 
-        sudo apt install golang-go
+        sudo apt install -y golang-go
 2. Install Google Ops agent
 
         curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
