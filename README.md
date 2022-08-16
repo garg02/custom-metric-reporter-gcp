@@ -45,7 +45,7 @@ For each pair in the file, the key becomes the name of the custom metric, and **
         
 ### Add cron job that reports the custom metric every minute
        
-       echo -e "* * * * * bash -c ./gcp_report_batch/metrics -f ~/batch_info.txt >> metrics_stdout.log 2>> metrics_stderr.log" | crontab -u $USER -
+       echo -e "* * * * * bash -c ./custom-metric-reporter-gcp/metrics -f ~/batch_info.txt >> metrics_stdout.log 2>> metrics_stderr.log" | crontab -u $USER -
        
        
 #### Editing textfile to modify values of custom metrics
