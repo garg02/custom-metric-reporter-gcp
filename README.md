@@ -3,7 +3,7 @@
 This application reports custom metrics to GCP Monitoring and is written in Go. To export the metrics, it reads a list of key-value pairs from an input file and creates (or appends the data to) the intended custom metric.
 
 
-For each pair in the file, the key becomes the name of the custom metric, and ***the value becomes part of the label of the custom metric*** (and not the actual value of the custom metric). While it may seem counterintuitive to store the metric value as a "metadata", our custom metric use-case is to join/align the metrics to an instance's CPU/GPU/IO usage. Therefore, we would benefit from storing the value as metric "metadata" rather than the number itself.
+For each pair in the file, the key becomes the name of the custom metric, and ***the value becomes part of the label of the custom metric*** (and not the actual value of the custom metric). While it may seem counterintuitive to store the value as a label, we want to join/align the metrics to an instance's CPU/GPU/IO usage. Therefore, we would benefit from storing the value as metric "metadata" rather than the number itself.
 
 ### Before Starting
 1.  Install Golang on your instance
