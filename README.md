@@ -1,1 +1,1 @@
-## Report Environment Variables as GCP Custom Metrics using Go
+## Report GCP Custom Metrics using Go
