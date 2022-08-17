@@ -24,7 +24,12 @@ For each pair in the file, the key becomes the name of the custom metric, and **
         sudo mkdir -p /opt/google 
         cd /opt/google
         sudo git clone https://github.com/GoogleCloudPlatform/compute-gpu-monitoring.git 
-        cd ~
+        cd /opt/google/compute-gpu-monitoring/linux
+        sudo pipenv sync
+        sudo cp /opt/google/compute-gpu-monitoring/linux/systemd/google_gpu_monitoring_agent.service /lib/systemd/system
+        sudo systemctl daemon-reload
+        sudo systemctl --no-reload --now enable /lib/systemd/system/google_gpu_monitoring_agent.service
+
 3. Install and build repo
         
         git clone https://github.com/garg02/custom-metric-reporter-gcp.git
