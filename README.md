@@ -25,10 +25,12 @@ For each pair in the file, the key becomes the name of the custom metric, and **
         cd /opt/google
         sudo git clone https://github.com/GoogleCloudPlatform/compute-gpu-monitoring.git 
         cd /opt/google/compute-gpu-monitoring/linux
-        sudo pipenv sync
-        sudo cp /opt/google/compute-gpu-monitoring/linux/systemd/google_gpu_monitoring_agent.service /lib/systemd/system
+        sudo python3 -m venv venv
+        sudo venv/bin/pip install wheel
+        sudo venv/bin/pip install -Ur requirements.txt
+        sudo cp /opt/google/compute-gpu-monitoring/linux/systemd/google_gpu_monitoring_agent_venv.service /lib/systemd/system
         sudo systemctl daemon-reload
-        sudo systemctl --no-reload --now enable /lib/systemd/system/google_gpu_monitoring_agent.service
+        sudo systemctl --no-reload --now enable /lib/systemd/system/google_gpu_monitoring_agent_venv.service
 
 3. Install and build repo
         
