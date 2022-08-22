@@ -9,14 +9,13 @@ For each pair in the file, the key becomes the name of the custom metric, and **
 1.  Install Golang and Git on your instance
 
         sudo apt install -y git-all
-        wget https://golang.org/dl/go1.19.linux-amd64.tar.gz
-        sudo tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
-        echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
-        echo "export GOPATH=~/.go" >> ~/.profile
-        source ~/.profile
+        wget -c https://go.dev/dl/go1.19.linux-amd64.tar.gz
+        sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
+        export PATH=$PATH:/usr/local/go/bin
         
 2. Install Google Ops agent
 
+        # install gcp ops agent 
         curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
         sudo bash add-google-cloud-ops-agent-repo.sh --also-install
 
@@ -31,14 +30,17 @@ For each pair in the file, the key becomes the name of the custom metric, and **
         sudo cp /opt/google/compute-gpu-monitoring/linux/systemd/google_gpu_monitoring_agent_venv.service /lib/systemd/system
         sudo systemctl daemon-reload
         sudo systemctl --no-reload --now enable /lib/systemd/system/google_gpu_monitoring_agent_venv.service
+        cd ~
 
 3. Install and build repo
         
         git clone https://github.com/garg02/custom-metric-reporter-gcp.git
         cd custom-metric-reporter-gcp
         go mod init metrics
+        go mod tidy
         go build metrics.go
         chmod +x metrics
+        sudo cp metrics /usr/local/bin/
         cd ~
 
 ### Add custom metrics and required metadata to file
@@ -53,7 +55,6 @@ For each pair in the file, the key becomes the name of the custom metric, and **
 ### Add cron job that reports the custom metric every minute
        
        echo -e "* * * * * bash -c ./custom-metric-reporter-gcp/metrics -f ~/batch_info.txt >> metrics_stdout.log 2>> metrics_stderr.log" | crontab -u $USER -
-       
        
 #### Editing textfile to modify values of custom metrics
         
