@@ -49,6 +49,7 @@ For each pair in the file, the key becomes the name of the custom metric, and **
         echo "INSTANCE_ID=$(curl http://metadata.google.internal/computeMetadata/v1/instance/id -H Metadata-Flavor:Google)" >> ~/batch_info.txt
         echo "ZONE_ID=$(curl http://metadata.google.internal/computeMetadata/v1/instance/zone -H Metadata-Flavor:Google | rev | cut -d/ -f1 | rev)" >> ~/batch_info.txt
         
+        # in this case the Unix timestamp is the batch_number
         echo "cpu_batch_num=$(date +%s)" >> ~/batch_info.txt
         echo "gpu_batch_num=$(date +%s)" >> ~/batch_info.txt
         
@@ -62,3 +63,7 @@ For each pair in the file, the key becomes the name of the custom metric, and **
         sed -i "s/gpu_batch_num=[[:digit:]]\+/gpu_batch_num=$(date +%s)/" ~/batch_info.txt
 
 #### Note: Cron job requires storing key-value pairs in persistant memory as environment variables get reset each time.
+
+### Appendix: 
+`FinalMonitoring.json' has been included as an example for aligning and joining MQL metrics.
+ `stress.sh` and `minimap.sh` are wrapper scripts that use `metrics` to report the current batch being run
