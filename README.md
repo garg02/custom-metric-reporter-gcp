@@ -65,5 +65,5 @@ For each pair in the file, the key becomes the name of the custom metric, and **
 #### Note: Cron job requires storing key-value pairs in persistant memory as environment variables get reset each time.
 
 ### Appendix: 
-`FinalMonitoring.json' has been included as an example for aligning and joining MQL metrics.
- `stress.sh` and `minimap.sh` are wrapper scripts that use `metrics` to report the current batch being run
+1. `FinalMonitoring.json` has been included as an example for aligning and joining MQL metrics.
+2. `stress.sh` and `minimap.sh` are wrapper scripts that use `metrics` to report the current batch being run
