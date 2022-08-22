@@ -21,7 +21,7 @@ import (
 type Config map[string]string
 
 func ReadConfig(filename string) (Config, error) {
-        // init with some bogus data
+        // init with empty strings
         config := Config{
  		"INSTANCE_ID":       "",
  		"PROJECT_ID":       "",
@@ -156,7 +156,6 @@ func main() {
         for batchLabel, batchVal := range config {
                 for i := 1; i < 5; i++ {
                         err = SubmitMetric(projID, instID, zoneID, batchLabel, batchVal)
-                        fmt.Println("hello world")
                         if err == nil {break}
                         time.Sleep(5 * time.Second)
                 }
