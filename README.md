@@ -44,7 +44,7 @@ For each pair in the file, the key becomes the name of the custom metric, and **
         cd ~
 
 ### Add custom metrics and required metadata to file
-        
+1.  Create file containing metadata and batch key-values (can be empty or garbabe)
         echo "PROJECT_ID=$(gcloud info --format='value(config.project)')" > ~/batch_info.txt
         echo "INSTANCE_ID=$(curl http://metadata.google.internal/computeMetadata/v1/instance/id -H Metadata-Flavor:Google)" >> ~/batch_info.txt
         echo "ZONE_ID=$(curl http://metadata.google.internal/computeMetadata/v1/instance/zone -H Metadata-Flavor:Google | rev | cut -d/ -f1 | rev)" >> ~/batch_info.txt
@@ -54,11 +54,11 @@ For each pair in the file, the key becomes the name of the custom metric, and **
         echo "gpu_batch_num=$(date +%s)" >> ~/batch_info.txt
         
 ### Add cron job that reports the custom metric every minute
-       
+1.  Command-  
        echo -e "* * * * * bash -c ./custom-metric-reporter-gcp/metrics -f ~/batch_info.txt >> metrics_stdout.log 2>> metrics_stderr.log" | crontab -u $USER -
        
 #### Editing textfile to modify values of custom metrics
-        
+1.  Replace using sed utility        
         sed -i "s/cpu_batch_num=[[:digit:]]\+/cpu_batch_num=$(date +%s)/" ~/batch_info.txt
         sed -i "s/gpu_batch_num=[[:digit:]]\+/gpu_batch_num=$(date +%s)/" ~/batch_info.txt
 
