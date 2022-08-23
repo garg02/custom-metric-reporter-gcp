@@ -63,8 +63,8 @@ echo -e "* * * * * /usr/local/bin/metrics -f batch_info.txt >> metrics.out 2>> m
        
 #### Editing textfile to modify values of custom metrics
 ```
-sed -i "s/cpu_batch_num=[[:digit:]]\+/cpu_batch_num=$(date +%s)/" ~/batch_info.txt
-sed -i "s/gpu_batch_num=[[:digit:]]\+/gpu_batch_num=$(date +%s)/" ~/batch_info.txt
+sed -i "s/^cpu_batch_num=.*/cpu_batch_num=$(date +%s)/" ~/batch_info.txt
+sed -i "s/^gpu_batch_num=.*/gpu_batch_num=$(date +%s)/" ~/batch_info.txt
 ```
 
 #### Note: Cron job requires storing key-value pairs in persistant memory as environment variables get reset each time.
