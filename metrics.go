@@ -126,11 +126,6 @@ func SubmitMetric(projID string, instID string, zoneID string,
 
 
 func main() {
-        if len(os.Args) < 1 {
-                log.Fatalf("need at least one argument")
-        } else {
-                fmt.Println(len(os.Args))
-        }
         file_ptr := flag.String("f", "", "file with metadata and batch label(s)/value(s)")
         flag.Parse()
 
